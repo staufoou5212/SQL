@@ -55,23 +55,34 @@ VALUES
     ('s19', 'Adam Salky', 'Freida Pinto| Logan Marshall-Green| Robert John Burke| Megan Elisabeth Kelly| Sarah Minnich| Hayes Hargrove| Mark Sivertsen| Brandon Fierro| Antonio Valles| Clint Obenchain'),
     ('s20', NULL, 'Blanca SuÃ¡rez| IvÃ¡n Marcos| Ã“scar Casas| AdriÃ¡n Lastra| Francesc Garrido| Stefan Weinert| Julia MÃ¶ller| Alicia Chojnowski')
     ;
+# The following SQL was written to answer specific questions about the content on Netflix. 
+
+Question #1: How many movie titles are there in the database? (movies only, not tv shows)
 
 SELECT COUNT(*)
 FROM "netflix_titles_info"
 WHERE "type"='Movie';
 
+Question #2: When was the most recent batch of tv shows and/or movies added to the database?
+
 SELECT max(date(date_added))
 FROM "netflix_titles_info";
+
+Question #3: List all the movies and tv shows in alphabetical order.
 
 SELECT title
 from "netflix_titles_info"
 ORDER BY title asc;
+
+Question #4: Who was the Director for the movie The Starling?
 
 SELECT director
 FROM "netflix_titles_info" Titles
 LEFT JOIN netflix_people People
 ON Titles.show_id=People.show_id
 WHERE Titles.title='The Starling';
+
+Question #5: What is the oldest movie in the database and what year was it made?
 
 SELECT title, release_year
 FROM "netflix_titles_info"
